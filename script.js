@@ -33,11 +33,11 @@ substractButton.addEventListener('click', function substractOne(){
 });
 //interaction for break buttons
 addButtonBreak.addEventListener('click', function addOne(){
-  desiredTimer.innerHTML = parseInt(desiredBreak.innerHTML)+1;
+  desiredBreak.innerHTML = parseInt(desiredBreak.innerHTML)+1;
 });
 
 substractButtonBreak.addEventListener('click', function substractOne(){
-  desiredTimer.innerHTML = parseInt(desiredBreak.innerHTML)-1;
+  desiredBreak.innerHTML = parseInt(desiredBreak.innerHTML)-1;
 });
 
 
