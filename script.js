@@ -55,8 +55,7 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function initializeClock(id, endtime) {
-    var clock = document.getElementById(id);
+function initializeClock(id, endtime, isActive) {
     var timeinterval = setInterval(function() {
         var t = getTimeRemaining(endtime);
         clock.innerHTML =
@@ -65,19 +64,39 @@ function initializeClock(id, endtime) {
         if (t.total <= 0) {
             clearInterval(timeinterval);
         }
-        stopButton.addEventListener('click', stopClock)
+        clock.addEventListener('click', stopClock)
         function stopClock() {
             clearInterval(timeinterval);
         }
     }, 1000);
 }
 
+function startStopClock(id, endtime, isActive) {
+  isActive = switchIsActive(isActive);
+  if(isActive === false) {
+    initializeClock(id, endtime, isActive)
+  }
+  else {
+    stopClock()
+  }
+}
+
+function switchIsActive(isActive) {
+  alert(isActive);
+  if(isActive === true) {
+    return false;
+  }
+  else if (isActive === false) {
+    return true;
+  }
+}
+
 
 
 // Adding event listener to the startbutton
-var startButton = document.getElementById('start-button');
-var stopButton = document.getElementById('stop-button');
-startButton.addEventListener('click', startClock);
+var clock = document.getElementById('clockdiv');
+var isActive = false;
+clock.addEventListener('click', startClock);
 
 // You need to create another function abstracting away what the button will do
 function startClock(ev) {
@@ -87,7 +106,7 @@ function startClock(ev) {
     // Meaning that you separate the working of the clock and the working of the button
     // Here you could change the clock however you want without the button even knowing
     // about the internal working of the clock! 
-    initializeClock('clockdiv', deadline);
+    initializeClock(clock, deadline);
 }
 
 // initializeClock('clockdiv', deadline);
