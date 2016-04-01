@@ -72,10 +72,7 @@ function initializeClock(id, endtime) {
     }, 1000);
 }
 
-function stopClock(id) {
-  var clock = document.getElementById(id);
-  
-}
+
 
 // Adding event listener to the startbutton
 var startButton = document.getElementById('start-button');
