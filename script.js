@@ -64,49 +64,50 @@ function initializeClock(id, endtime, isActive) {
         if (t.total <= 0) {
             clearInterval(timeinterval);
         }
-        clock.addEventListener('click', stopClock)
-        function stopClock() {
-            clearInterval(timeinterval);
-        }
     }, 1000);
 }
 
 function startStopClock(id, endtime, isActive) {
-  isActive = switchIsActive(isActive);
+  alert('isActive before: '+ isActive);
   if(isActive === false) {
-    initializeClock(id, endtime, isActive)
+    alert("it's starting!");
+    initializeClock(id, endtime, isActive);
   }
   else {
-    stopClock()
+    alert('a');
+    stopClock();
   }
+  isActive = switchIsActive(isActive);
+  alert('isActive status: ' + isActive);
+  return isActive;
 }
 
 function switchIsActive(isActive) {
-  alert(isActive);
   if(isActive === true) {
-    return false;
+    isActive = false;
   }
   else if (isActive === false) {
-    return true;
+    isActive = true;
   }
+  return isActive;
 }
+
+function stopClock() {
+            alert(yoli);
+            clearInterval(timeinterval);
+        }
 
 
 
 // Adding event listener to the startbutton
 var clock = document.getElementById('clockdiv');
-var isActive = false;
+var buttonStatus = false;
 clock.addEventListener('click', startClock);
 
 // You need to create another function abstracting away what the button will do
-function startClock(ev) {
-    ev.preventDefault();
+function startClock() {
 
-    // It creates another abstraction layer over the clock start function
-    // Meaning that you separate the working of the clock and the working of the button
-    // Here you could change the clock however you want without the button even knowing
-    // about the internal working of the clock! 
-    initializeClock(clock, deadline);
+    buttonStatus = startStopClock(clock, deadline, buttonStatus);
 }
 
 // initializeClock('clockdiv', deadline);
