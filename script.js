@@ -5,7 +5,7 @@
 
 //set desired countdown variable
 var currentDate = new Date();
-var pomodoroDuration = 25;
+var pomodoroDuration = 1;
 var deadline = new Date(currentDate.getTime() + (pomodoroDuration * 60 * 1000));
 
 var breakDuration = 5;
@@ -47,6 +47,7 @@ function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date());
     var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000) / 60);
+    var total = Math.floor((t /1000) / 60);
 
     return {
         'minutes': minutes,
@@ -60,15 +61,25 @@ function initializeClock(id, endtime) {
         var t = getTimeRemaining(endtime);
         clock.innerHTML =
             'minutes: ' + t.minutes + '<br>' +
-            'seconds: ' + t.seconds;
+            'seconds: ' + t.seconds + '<br>' + 'total: ' + t.total;
         if (t.total <= 0) {
+            clearInterval(timeinterval);
+        }
+        stopButton.addEventListener('click', stopClock)
+        function stopClock() {
             clearInterval(timeinterval);
         }
     }, 1000);
 }
 
+function stopClock(id) {
+  var clock = document.getElementById(id);
+  
+}
+
 // Adding event listener to the startbutton
 var startButton = document.getElementById('start-button');
+var stopButton = document.getElementById('stop-button');
 startButton.addEventListener('click', startClock);
 
 // You need to create another function abstracting away what the button will do
